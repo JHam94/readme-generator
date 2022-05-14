@@ -22,7 +22,14 @@ const questions = () => {
         {
             type: 'input',
             name: 'description',
-            message: 'Please write a description of your project'
+            message: 'Please write a description of your project (Required)',
+            validate: descriptionInput => {
+                if (descriptionInput) {
+                    return true;
+                } else {
+                    console.log('Please enter a description of your project!');
+                } return false;
+            }
         },
         {
             type: 'input',
@@ -39,12 +46,20 @@ const questions = () => {
         {
             type: 'input',
             name: 'use',
-            message: 'How do you use this project?'
+            message: 'How do you use this project? (Required)',
+            validate: useInput => {
+                if (useInput) {
+                    return true;
+                } else {
+                    console.log('Please describe how to use this project!');
+                } return false;
+            }
         },
         {
-            type: 'input',
+            type: 'checkbox',
             name: 'licenses',
-            message: 'What kind of license(s) does this project have?'
+            message: 'What kind of license(s) does this project have? (Check all that apply)',
+            choices: ['MIT', 'GPLv2', 'Apache 2.0', 'ISC']
         },
         {
             type: 'input',
@@ -55,13 +70,46 @@ const questions = () => {
             type: 'input',
             name: 'questions',
             message: 'Please enter any questions you have regarding the project'
+        },
+        {
+            type: 'input',
+            name: 'Github',
+            message: 'Please enter your GitHub username (Required)',
+            validate: GithubInput => {
+                if (GithubInput) {
+                    return true;
+                } else {
+                    console.log('Please enter your GitHub username!');
+                } return false;
+            }
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'Please enter your email address (Required)',
+            validate: emailInput => {
+                if (emailInput) {
+                    return true;
+                } else {
+                    console.log('Please enter your email address!');
+                } return false;
+            }
         }
     ]);
 };
 
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+const writeToFile = readme => {
+    fs.writeFile('README.md', readme, err => {
+        if (err) {
+            console.log(err);
+            return;
+        } else {
+            console.log("README file successfully created!")
+        }
+    })
+};
 
 // TODO: Create a function to initialize app
 function init() {}
