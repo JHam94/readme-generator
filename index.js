@@ -68,6 +68,11 @@ const questions = () => {
         },
         {
             type: 'input',
+            name: 'test',
+            message: "Please provide instructions for how to test the project"
+        },
+        {
+            type: 'input',
             name: 'questions',
             message: 'Please enter any questions you have regarding the project'
         },
