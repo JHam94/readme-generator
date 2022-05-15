@@ -1,7 +1,7 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generatePage = require('./Develop/utils/generateMarkdown.js');
+const generatePage = require('./Develop/utils/generateMarkdown');
 
 // TODO: Create an array of questions for user input
 const questions = () => {
@@ -45,10 +45,10 @@ const questions = () => {
         },
         {
             type: 'input',
-            name: 'use',
+            name: 'usage',
             message: 'How do you use this project? (Required)',
-            validate: useInput => {
-                if (useInput) {
+            validate: usageInput => {
+                if (usageInput) {
                     return true;
                 } else {
                     console.log('Please describe how to use this project!');
@@ -100,8 +100,8 @@ const questions = () => {
 
 
 // TODO: Create a function to write README file
-const writeToFile = readme => {
-    fs.writeFile('README.md', readme, err => {
+const writeToFile = results => {
+    fs.writeFile('.README.md', results, err => {
         if (err) {
             console.log(err);
             return;
@@ -112,7 +112,18 @@ const writeToFile = readme => {
 };
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    questions()
+    .then(answers => {
+        return generatePage(answers);
+    })
+    .then(results => {
+        return writeToFile(results);
+    })
+.catch(err => {
+    console.log(err)
+})
+}
 
 // Function call to initialize app
 init();
