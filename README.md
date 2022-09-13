@@ -29,9 +29,6 @@ THEN I am taken to the corresponding section of the README
  * Node.js
  * Inquirer package 
 
- ## Questions 
-
- If you have any questions please contact me at johnhamborsky94@gmail.com 
 
 ## Example
 
